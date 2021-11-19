@@ -1,0 +1,73 @@
+# importar bibliotecas
+import numpy as np        # biblioteca de calculos
+import matplotlib.pyplot as plt       # para plotar
+
+#######################################
+
+
+## Detecção de Max e Min
+# ler a imagem
+B1= plt.imread('a.gif')
+
+
+#Numero de linhas e colunas
+#nl, nc = B1.shape
+#print(nl, nc)
+nl = B1.shape [0]
+nc = B1.shape [1]
+#nb = B1.shape [2]
+print(nl, nc)
+
+
+#Detectar o valor máximo e mínimo de nivel de cinza
+max=np.max(B1)
+min=np.min(B1)
+print('min e max =', min, max)
+
+
+
+##Filtro Passa Baixas: Media 3x3
+def low_pass_media
+    jan=np.zeros((j,j))+1
+
+
+#Criar copia da imagem em float
+C1=np.array(B1[:,:,1], dtype=float)
+#Criar copia da imagem em que os nivel de cinza vao ser substituidos pela media e nas extremidades continuam os mesmos
+C2=C1
+#Janela Simetrica
+j=7
+#Valor de borda a ser considerado como limite da varredura
+b=int((j-1)/2)
+
+
+#Janela de varredura na imagem jxj começando em [j,j] e parando em [nc-j+1,nl-j+1]
+jan=np.zeros((j,j))
+#Loop para Varrer todas as colunas da imagem
+for C in range (b,(nc-b),1):
+
+    #Loop para Varrer todas as linhas da imagem
+    for L in range (b,(nl-b),1):
+
+        #Definir a janela jxj ao redor do elemento central da C-ésima coluna e L-ésima linha da imagem
+        #Loop para varrer todas as colunas da janela
+        for c in range (j):
+
+            #Loop para varrer todas as linhas da janela
+            for l in range (j):
+
+                #Elemento da janela
+                elem=C1[L-b+l,C-b+c]
+
+                #Matriz janela jxj
+                jan[l,c]=elem
+
+        #Definir novo valor para o pixel como a media dos niveis de cinza na janela
+        C2[L,C]=np.mean(jan)
+
+#Transformar copia da imagem para int 8 bits
+B2=np.uint8(np.round(C2))
+
+#Plotar nova imagem
+plt.imsave('Mrs_Bean_filtro_media_7x7.gif',B2,cmap='gray')
+plt.show()
